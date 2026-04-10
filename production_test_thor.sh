@@ -5,6 +5,13 @@ if [ "$(whoami)" != "root" ] ; then
 	exit 1
 fi
 
+T4000_DETECTED=false
+if [ "$(lshw -c system -short | grep -c 'T4000')" == "0" ]; then
+	T4000_DETECTED=false
+else
+	T4000_DETECTED=true
+fi
+
 # Check the scipts' folder
 SCRIPTS_FOLDER=${PWD}
 if [ $# -eq 1 ]; then
@@ -101,13 +108,15 @@ function test_menu {
 		echo "10) RS-422 Test"
 		echo "11) RS-485 Write Test"
 		echo "12) RS-485 Read Test"
-		echo "13) CAN Bus (Transmit) Test"
-		echo "14) CAN Bus (Receive) Test"
-		echo "15) Digital Out Test"
-		echo "16) Digital In-0 Test"
-		echo "17) Digital In-1 Test"
-		echo "18) Power LED Test"
-		echo "19) Fan Test"
+		echo "13) Digital Out Test"
+		echo "14) Digital In-0 Test"
+		echo "15) Digital In-1 Test"
+		echo "16) Power LED Test"
+		echo "17) Fan Test"
+		if ! $T4000_DETECTED; then
+			echo "18) CAN Bus (Transmit) Test"
+			echo "19) CAN Bus (Receive) Test"
+		fi
 		read -p "Type the test number (or quit) [1/.../q]: " choice
 		echo ""
 
@@ -176,32 +185,32 @@ function test_menu {
 				sudo gnome-terminal -- $SCRIPTS_FOLDER/test_rs485_read_thor.sh
 				;;
 			13 )
-				echo "CANBus Transmit Test"
-				sudo gnome-terminal -- $SCRIPTS_FOLDER/test_can_transmit_thor.sh
-				;;
-			14 )
-				echo "CANBus Receive Test"
-				sudo gnome-terminal -- $SCRIPTS_FOLDER/test_can_receive_thor.sh
-				;;
-			15 )
 				echo "Digital Out Test"
 				sudo gnome-terminal -- $SCRIPTS_FOLDER/test_digital_out_multi_thor.sh
 				;;
-			16 )
+			14 )
 				echo "Digital In-0 Test"
 				sudo gnome-terminal -- $SCRIPTS_FOLDER/test_digital_in0_thor.sh
 				;;
-			17 )
+			15 )
 				echo "Digital In-1 Test"
 				sudo gnome-terminal -- $SCRIPTS_FOLDER/test_digital_in1_thor.sh
 				;;
-			18 )
+			16 )
 				echo "Power LED Test"
 				sudo gnome-terminal -- $SCRIPTS_FOLDER/test_power_led_thor.sh
 				;;
-			19 )
+			17 )
 				echo "Fan Test"
 				sudo gnome-terminal -- $SCRIPTS_FOLDER/test_fan.sh
+				;;
+			18 )
+				echo "CANBus Transmit Test"
+				sudo gnome-terminal -- $SCRIPTS_FOLDER/test_can_transmit_thor.sh
+				;;
+			19 )
+				echo "CANBus Receive Test"
+				sudo gnome-terminal -- $SCRIPTS_FOLDER/test_can_receive_thor.sh
 				;;
 			[Qq]* )
 				echo "Quitting ..."
