@@ -122,7 +122,9 @@ function test_menu {
 
 		case $choice in
 			1 ) 
-				echo "* Set the device in recovery mode, connect recovery USB and check the device in recovery mode with lsusb (0955:7*23)"
+				echo "* Set the device in recovery mode, connect recovery USB and check the device in recovery mode with lsusb"
+				echo "*     0955:7026 for AGX Thor T5000"
+				echo "*     0955:7226 for AGX Thor T4000"
 				echo "* Reset the device, connect Debug USB and check the serial connection"
 				;;
 			2 )
