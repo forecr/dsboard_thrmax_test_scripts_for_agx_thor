@@ -3,6 +3,9 @@ if [ "$(whoami)" != "root" ] ; then
 	echo "Please run as root"
 	exit 1
 fi
+#DSBOARD-THRMAX REV 1.1
+#IN0_PIN_NUM=640
+#IN0_PIN=PJ.05
 
 IN0_PIN_NUM=533
 IN0_PIN=PDD.03

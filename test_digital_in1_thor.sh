@@ -4,6 +4,10 @@ if [ "$(whoami)" != "root" ] ; then
 	exit 1
 fi
 
+#DSBOARD-THRMAX REV 1.1
+#IN1_PIN_NUM=641
+#IN1_PIN=PJ.06
+
 IN1_PIN_NUM=534
 IN1_PIN=PDD.04
 
