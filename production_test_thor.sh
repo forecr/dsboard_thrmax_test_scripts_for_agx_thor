@@ -113,9 +113,10 @@ function test_menu {
 		echo "15) Digital In-1 Test"
 		echo "16) Power LED Test"
 		echo "17) Fan Test"
+		echo "18) 6-AXIS IMU & Temperature Sensor Test"
 		if ! $T4000_DETECTED; then
-			echo "18) CAN Bus (Transmit) Test"
-			echo "19) CAN Bus (Receive) Test"
+			echo "19) CAN Bus (Transmit) Test"
+			echo "20) CAN Bus (Receive) Test"
 		fi
 		read -p "Type the test number (or quit) [1/.../q]: " choice
 		echo ""
@@ -207,10 +208,14 @@ function test_menu {
 				sudo gnome-terminal -- $SCRIPTS_FOLDER/test_fan.sh
 				;;
 			18 )
+				echo "6-AXIS IMU & Temperature Sensor Test"
+				sudo gnome-terminal -- $SCRIPTS_FOLDER/test_wsen_isds_imu.sh -i 0.1
+				;;
+			19 )
 				echo "CANBus Transmit Test"
 				sudo gnome-terminal -- $SCRIPTS_FOLDER/test_can_transmit_thor.sh
 				;;
-			19 )
+			20 )
 				echo "CANBus Receive Test"
 				sudo gnome-terminal -- $SCRIPTS_FOLDER/test_can_receive_thor.sh
 				;;
