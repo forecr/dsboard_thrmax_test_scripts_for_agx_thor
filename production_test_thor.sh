@@ -5,6 +5,9 @@ if [ "$(whoami)" != "root" ] ; then
 	exit 1
 fi
 
+# Check the board revision
+BOARD_REV_1_0=false
+
 T4000_DETECTED=false
 if [ "$(lshw -c system -short | grep -c 'T4000')" == "0" ]; then
 	T4000_DETECTED=false
@@ -193,11 +196,11 @@ function test_menu {
 				;;
 			14 )
 				echo "Digital In-0 Test"
-				sudo gnome-terminal -- $SCRIPTS_FOLDER/test_digital_in0_thor.sh
+				sudo gnome-terminal -- $SCRIPTS_FOLDER/test_digital_in0_thor.sh $BOARD_REV_1_0
 				;;
 			15 )
 				echo "Digital In-1 Test"
-				sudo gnome-terminal -- $SCRIPTS_FOLDER/test_digital_in1_thor.sh
+				sudo gnome-terminal -- $SCRIPTS_FOLDER/test_digital_in1_thor.sh $BOARD_REV_1_0
 				;;
 			16 )
 				echo "Power LED Test"

@@ -3,12 +3,16 @@ if [ "$(whoami)" != "root" ] ; then
 	echo "Please run as root"
 	exit 1
 fi
-#DSBOARD-THRMAX REV 1.1
-#IN0_PIN_NUM=640
-#IN0_PIN=PJ.05
 
-IN0_PIN_NUM=533
-IN0_PIN=PDD.03
+BOARD_REV_1_0=$1
+
+IN0_PIN_NUM=640
+IN0_PIN=PJ.05
+
+if $BOARD_REV_1_0; then
+	IN0_PIN_NUM=533
+	IN0_PIN=PDD.03
+fi
 
 sudo echo $IN0_PIN_NUM > /sys/class/gpio/export
 sudo echo in > /sys/class/gpio/$IN0_PIN/direction

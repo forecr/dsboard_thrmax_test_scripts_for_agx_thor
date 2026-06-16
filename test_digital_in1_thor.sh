@@ -4,12 +4,15 @@ if [ "$(whoami)" != "root" ] ; then
 	exit 1
 fi
 
-#DSBOARD-THRMAX REV 1.1
-#IN1_PIN_NUM=641
-#IN1_PIN=PJ.06
+BOARD_REV_1_0=$1
 
-IN1_PIN_NUM=534
-IN1_PIN=PDD.04
+IN1_PIN_NUM=641
+IN1_PIN=PJ.06
+
+if $BOARD_REV_1_0; then
+	IN1_PIN_NUM=534
+	IN1_PIN=PDD.04
+fi
 
 sudo echo $IN1_PIN_NUM > /sys/class/gpio/export
 sudo echo in > /sys/class/gpio/$IN1_PIN/direction
